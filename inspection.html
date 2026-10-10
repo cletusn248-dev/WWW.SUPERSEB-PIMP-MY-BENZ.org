@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Mercedes-Benz Inspection Gallery | SUPERSEB — PIMP MY BENZ</title>
+<meta name="description" content="Browse 56 Mercedes-Benz exterior and interior views in the SUPERSEB inspection gallery.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#080808">
+<link rel="canonical" href="https://cletusn248-dev.github.io/WWW.SUPERSEB-PIMP-MY-BENZ.org/inspection.html">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<style>
+:root{--soft:#f6f6f3;--gold:#c89632;--gold-light:#efc96f;--gold-dark:#8a621c;--text:#171717;--muted:#6b6b6b;--line:#dfddd6;--gold-grad:linear-gradient(135deg,var(--gold-dark),var(--gold),var(--gold-light))}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--soft);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+.topbar{position:sticky;top:0;z-index:900;min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px max(20px,env(safe-area-inset-right)) 11px max(20px,env(safe-area-inset-left));background:rgba(8,8,8,.94);border-bottom:1px solid rgba(255,255,255,.09);backdrop-filter:blur(12px)}
+.back{width:46px;height:46px;display:inline-flex;align-items:center;justify-content:center;border:1px solid rgba(239,201,111,.45);border-radius:50%;background:transparent;color:var(--gold-light);cursor:pointer;transition:background .2s,color .2s,transform .2s}
+.back:hover{background:var(--gold-grad);color:#111;transform:translateX(-2px)}
+.back svg{width:22px;height:22px}
+.topbar-logo{height:34px;width:auto;max-width:150px;object-fit:contain}
+.topbar-fallback{display:none;color:var(--gold-light);font-size:15px;font-weight:800;letter-spacing:.12em}
+
+.hero{position:relative;min-height:420px;display:flex;align-items:center;overflow:hidden;background:#060606}
+.hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.7) 45%,rgba(0,0,0,.45))}
+.hero-inner{position:relative;z-index:2;max-width:820px;padding:70px 7vw}
+.kicker{display:flex;align-items:center;gap:9px;color:#efcf82;font-size:10px;font-weight:800;letter-spacing:.26em;text-transform:uppercase}
+.kicker::before{content:"";width:28px;height:1px;background:#efcf82}
+.hero h1{margin:17px 0 0;color:#fff;font-size:clamp(2.6rem,6.5vw,5rem);line-height:.96;letter-spacing:-.04em}
+.hero h1 span{color:var(--gold-light)}
+.hero p{max-width:620px;margin:20px 0 0;color:#d7d7d7;line-height:1.8}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);background:#101010;color:#fff}
+.stat{padding:22px;border-right:1px solid rgba(255,255,255,.08)}
+.stat:last-child{border:0}
+.stat b{display:block;color:#efcf82;font-size:20px}
+.stat span{display:block;margin-top:5px;color:#8e8e8e;font-size:9px;font-weight:700;letter-spacing:.13em;text-transform:uppercase}
+
+.section{padding:60px 7vw 80px}
+.section-label{color:var(--gold-dark);font-size:10px;font-weight:800;letter-spacing:.24em;text-transform:uppercase}
+.section h2{margin:10px 0 0;font-size:clamp(1.9rem,4vw,3rem);line-height:1.05}
+.section>p{max-width:700px;margin:14px 0 0;color:var(--muted);line-height:1.8}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 24px}
+.filter{padding:11px 18px;border:1px solid var(--line);border-radius:30px;background:#fff;color:var(--text);font-size:11px;font-weight:800;letter-spacing:.06em;cursor:pointer;transition:.2s}
+.filter:hover{border-color:var(--gold)}
+.filter.active{background:var(--gold-grad);color:#090909;border-color:transparent}
+.count{margin-left:auto;align-self:center;color:var(--muted);font-size:12px}
+
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:12px;background:#fff;cursor:pointer;transition:transform .22s,box-shadow .22s;text-align:left;padding:0;color:inherit}
+.card:hover{transform:translateY(-4px);box-shadow:0 15px 35px rgba(0,0,0,.1)}
+.thumb{position:relative;aspect-ratio:4/3;background:#111;overflow:hidden}
+.thumb img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .5s,transform .5s}
+.thumb img.loaded{opacity:1}
+.card:hover .thumb img{transform:scale(1.06)}
+.tag{position:absolute;left:10px;top:10px;z-index:2;padding:5px 9px;border-radius:20px;background:rgba(8,8,8,.8);color:var(--gold-light);font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.card-body{padding:14px 15px 16px}
+.card-body h3{margin:0 0 5px;font-size:15px}
+.card-body p{margin:0;color:var(--muted);font-size:12px;line-height:1.6}
+
+/* GOLDEN LOADER */
+.loader{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#0d0d0d;z-index:1;transition:opacity .3s}
+.loader.done{opacity:0;pointer-events:none}
+.ring{width:38px;height:38px;border-radius:50%;border:3px solid rgba(239,201,111,.18);border-top-color:var(--gold-light);border-right-color:var(--gold);animation:spin .85s linear infinite}
+.failed .ring{display:none}
+.failmsg{display:none;color:var(--gold-light);font-size:11px;font-weight:700;letter-spacing:.1em}
+.failed .failmsg{display:block}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* LIGHTBOX */
+.lb{position:fixed;inset:0;z-index:1000;display:none;flex-direction:column;background:rgba(5,5,5,.96);padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.lb.open{display:flex}
+.lb-bar{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;color:var(--gold-light);font-size:12px;font-weight:800;letter-spacing:.1em}
+.lb-btn{width:44px;height:44px;border-radius:50%;border:1px solid rgba(239,201,111,.45);background:transparent;color:var(--gold-light);cursor:pointer;font-size:20px;display:inline-flex;align-items:center;justify-content:center}
+.lb-btn:hover{background:var(--gold-grad);color:#111}
+.lb-stage{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:0 64px}
+.lb-stage img{max-width:100%;max-height:100%;object-fit:contain;border-radius:8px;opacity:0;transition:opacity .35s}
+.lb-stage img.loaded{opacity:1}
+.lb-stage .loader{background:transparent}
+.lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);z-index:3}
+.lb-prev{left:12px}.lb-next{right:12px}
+.lb-info{padding:16px 7vw 22px;color:#fff;text-align:center}
+.lb-info h3{margin:0 0 6px;font-size:20px}
+.lb-info p{margin:0 auto;max-width:640px;color:#b5b5b5;font-size:13px;line-height:1.7}
+.lb-info .focus{margin-top:10px;color:var(--gold-light);font-size:11px;font-weight:800;letter-spacing:.08em}
+
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:40px}
+.button{min-height:48px;display:inline-flex;align-items:center;justify-content:center;padding:12px 22px;border-radius:7px;font-size:12px;font-weight:800;transition:transform .2s}
+.button:hover{transform:translateY(-2px)}
+.button-gold{color:#090909;background:var(--gold-grad)}
+.button-dark{color:#fff;background:#101010}
+
+.footer{padding:26px 7vw;background:#050505;color:#fff;border-top:1px solid rgba(255,255,255,.08);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.footer-brand{color:#efcf82;font-size:11px;font-weight:800;letter-spacing:.11em}
+.footer-copy{color:#777;font-size:10px}
+
+@media (max-width:1000px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.section{padding:50px 16px 70px}.hero-inner{padding:60px 22px}.lb-stage{padding:0 8px}.lb-prev{left:6px}.lb-next{right:6px}.count{width:100%;margin:6px 0 0}.card-body p{display:none}}
+@media (max-width:420px){.stat{padding:16px 10px}.stat b{font-size:16px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <button class="back" id="backButton" type="button" aria-label="Go back to the previous page">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+  </button>
+  <div>
+    <img class="topbar-logo" src="images/logo.png" alt="SUPERSEB — PIMP MY BENZ">
+    <div class="topbar-fallback">SUPERSEB</div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <img class="hero-image" src="https://images.unsplash.com/photo-1632823471564-1ecdf5c5edb3?auto=format&fit=crop&w=1800&q=80" alt="Mercedes-Benz inspection" fetchpriority="high">
+    <div class="hero-overlay"></div>
+    <div class="hero-inner">
+      <div class="kicker">Inspection Gallery</div>
+      <h1>Inspect It.<br><span>Closely.</span></h1>
+      <p>Browse Mercedes-Benz exterior and interior views. Tap any photo to open it full screen, read the short info and see what an inspection looks at.</p>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><b id="statAll">56</b><span>Total views</span></div>
+    <div class="stat"><b id="statExt">28</b><span>Exterior</span></div>
+    <div class="stat"><b id="statInt">28</b><span>Interior</span></div>
+  </section>
+
+  <section class="section">
+    <div class="section-label">Benz Gallery</div>
+    <h2>Exterior &amp; Interior Views.</h2>
+    <p>Photos are for reference and inspiration. Inspection notes describe what is typically checked on this part of a Mercedes-Benz and are not a diagnosis of any vehicle.</p>
+
+    <div class="filters" id="filters">
+      <button class="filter active" data-f="all" type="button">ALL</button>
+      <button class="filter" data-f="Exterior" type="button">EXTERIOR</button>
+      <button class="filter" data-f="Interior" type="button">INTERIOR</button>
+      <span class="count" id="count"></span>
+    </div>
+
+    <div class="grid" id="grid"></div>
+
+    <div class="cta">
+      <a class="button button-gold" href="repairs.html?from=inspection.html#request">Request A Repair</a>
+      <a class="button button-dark" href="https://wa.me/2347030467337" target="_blank" rel="noopener">WhatsApp SUPERSEB</a>
+    </div>
+  </section>
+</main>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <div class="lb-bar"><span id="lbCount"></span><button class="lb-btn" id="lbClose" type="button" aria-label="Close">&#x2715;</button></div>
+  <div class="lb-stage" id="lbStage">
+    <button class="lb-btn lb-prev" id="lbPrev" type="button" aria-label="Previous">&#8249;</button>
+    <div class="loader" id="lbLoader"><div class="ring"></div></div>
+    <img id="lbImg" alt="">
+    <button class="lb-btn lb-next" id="lbNext" type="button" aria-label="Next">&#8250;</button>
+  </div>
+  <div class="lb-info"><h3 id="lbTitle"></h3><p id="lbText"></p><div class="focus" id="lbFocus"></div></div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">SUPERSEB — PIMP MY BENZ</div>
+  <div class="footer-copy">© 2026 SUPERSEB. All rights reserved.</div>
+</footer>
+
+<script>
+(() => {
+  const FALLBACK_PAGE = "services.html";
+
+  /* ---------- BACK ARROW: returns to the page the visitor came from ---------- */
+  const here = location.pathname.split("/").pop() || "index.html";
+  function previousPage() {
+    try {
+      const from = new URLSearchParams(location.search).get("from");
+      if (from && /^[\w.\-]+\.html$/i.test(from) && from !== here) return from;
+    } catch (e) {}
+    try {
+      if (document.referrer) {
+        const ref = new URL(document.referrer);
+        const refFile = ref.pathname.split("/").pop();
+        if (ref.origin === location.origin && refFile && refFile !== here) return ref.pathname + ref.search + ref.hash;
+      }
+    } catch (e) {}
+    return null;
+  }
+  document.getElementById("backButton").addEventListener("click", () => {
+    const t = previousPage();
+    if (t) location.href = t;
+    else if (history.length > 1) history.back();
+    else location.href = FALLBACK_PAGE;
+  });
+
+  /* ---------- GALLERY DATA: [type, title, info, inspection focus, search keywords] ----------
+     Images load from loremflickr.com (online). To use your own photos, replace the
+     'src' logic in imgUrl() or add a full URL as a 6th item in any row.            */
+  const D = [
+    ["Exterior","C-Class Sedan","Compact executive sedan with clean, balanced proportions.","Paint finish, panel gaps, headlights","mercedes,c-class"],
+    ["Exterior","E-Class Sedan","Business-class comfort with a refined, long-wheelbase stance.","Door alignment, bumpers, chrome trim","mercedes,e-class"],
+    ["Exterior","S-Class Sedan","The flagship limousine of the range.","Body lines, paint depth, lighting units","mercedes,s-class"],
+    ["Exterior","A-Class Hatch","Entry model with sharp, modern styling.","Rear hatch seal, bumper corners","mercedes,a-class"],
+    ["Exterior","CLA Coupe","Four-door coupe with a sloping roofline.","Frameless doors, window seals","mercedes,cla"],
+    ["Exterior","CLS Coupe","Sleek four-door coupe that started the segment.","Roof line, rear lamps, wheel arches","mercedes,cls"],
+    ["Exterior","GLA Compact SUV","Small crossover with a raised seating position.","Underbody scuffs, roof rails","mercedes,gla"],
+    ["Exterior","GLC SUV","Popular mid-size SUV for city and highway.","Tailgate gap, sill panels, bumpers","mercedes,glc"],
+    ["Exterior","GLE SUV","Spacious SUV with a confident presence.","Wheel arches, door edges, paint","mercedes,gle"],
+    ["Exterior","GLS SUV","Large seven-seat luxury SUV.","Running boards, alloy wheels, tailgate","mercedes,gls"],
+    ["Exterior","G-Wagon","Iconic boxy off-roader with a timeless shape.","Door hinges, panel fit, spare mount","mercedes,g-wagon"],
+    ["Exterior","AMG GT Coupe","Low, wide two-door performance coupe.","Front splitter, aero panels, paint","mercedes,amg,gt"],
+    ["Exterior","SL Roadster","Classic open-top grand tourer.","Roof mechanism, seals, hood fit","mercedes,roadster"],
+    ["Exterior","C-Class Cabriolet","Soft-top four-seat open car.","Soft-top fabric, drain channels","mercedes,cabriolet"],
+    ["Exterior","E-Class Estate","Practical wagon with a long roofline.","Tailgate seal, roof rails, rear glass","mercedes,estate"],
+    ["Exterior","V-Class Van","Premium people mover for groups and VIP use.","Sliding door tracks, side panels","mercedes,v-class"],
+    ["Exterior","Sprinter Van","Commercial workhorse with a Benz badge.","Cargo doors, underbody, corrosion","mercedes,sprinter"],
+    ["Exterior","Maybach S-Class","Ultra-luxury long-wheelbase sedan.","Two-tone paint, chrome, rear doors","mercedes,maybach"],
+    ["Exterior","EQS Electric","Electric flagship with a flowing design.","Charge port flap, light bar, seals","mercedes,eqs"],
+    ["Exterior","EQE Electric","Electric executive model with a smooth shape.","Aero trim, lamps, wheel finish","mercedes,eqe"],
+    ["Exterior","Front Grille Close-up","Star badge and grille detail.","Badge condition, grille chips, sensors","mercedes,grille"],
+    ["Exterior","LED Headlight Detail","Modern LED and multibeam light units.","Lens clarity, moisture, aim","mercedes,headlight"],
+    ["Exterior","Rear Tail Light","Wraparound LED tail lamp signature.","Lamp seal, cracks, bulb function","mercedes,taillight"],
+    ["Exterior","AMG Alloy Wheel","Multi-spoke forged-style alloy wheel.","Kerb rash, tyre wear, brake discs","mercedes,wheel"],
+    ["Exterior","Brake Caliper","Painted performance brake caliper.","Pad thickness, disc scoring, leaks","mercedes,brake"],
+    ["Exterior","Side Mirror","Heated, folding wing mirror.","Fold motor, glass, indicator","mercedes,mirror"],
+    ["Exterior","Panoramic Roof","Large glass roof that brightens the cabin.","Seal condition, drains, shade motor","mercedes,sunroof"],
+    ["Exterior","Engine Bay","Clean engine bay on a petrol model.","Leaks, belts, fluid levels, mounts","mercedes,engine"],
+
+    ["Interior","S-Class Cabin","Wide, leather-wrapped cabin with ambient lighting.","Seat bolsters, trim fit, screens","mercedes,interior,sclass"],
+    ["Interior","E-Class Dashboard","Widescreen cockpit with a floating display.","Display pixels, dash rattles, vents","mercedes,dashboard"],
+    ["Interior","C-Class Cockpit","Driver-focused layout with digital cluster.","Cluster warnings, switch feel","mercedes,cockpit"],
+    ["Interior","Steering Wheel","Leather multifunction wheel with touch controls.","Leather wear, buttons, airbag cover","mercedes,steering"],
+    ["Interior","Digital Instrument Cluster","Configurable digital gauge display.","Dead pixels, warning lights, brightness","mercedes,cluster"],
+    ["Interior","MBUX Infotainment","Touchscreen media and navigation system.","Touch response, audio, Bluetooth","mercedes,infotainment"],
+    ["Interior","Front Leather Seats","Comfort seats with stitched leather.","Cracks, stitching, seat motors","mercedes,leather,seats"],
+    ["Interior","Rear Seats","Spacious rear bench with armrest.","Upholstery, belts, rear controls","mercedes,rear,seats"],
+    ["Interior","Executive Rear Lounge","Reclining rear seats for chauffeur use.","Recline motors, tables, screens","mercedes,chauffeur"],
+    ["Interior","Centre Console","Storage and controller area between seats.","Cup holders, lid hinges, touchpad","mercedes,console"],
+    ["Interior","Gear Selector","Column-mounted electronic shifter.","Selector response, shift lights","mercedes,gear,shifter"],
+    ["Interior","Ambient Lighting","Multi-colour interior lighting strips.","Light strip faults, colour match","mercedes,ambient,light"],
+    ["Interior","Air Vents","Turbine-style air vents with chrome rings.","Vent flaps, rings, airflow","mercedes,air,vent"],
+    ["Interior","Climate Control Panel","Dual-zone climate buttons and display.","AC response, temperature, switches","mercedes,climate"],
+    ["Interior","Door Panel","Leather door card with speaker grille.","Window switches, speakers, trim","mercedes,door,panel"],
+    ["Interior","Burmester Sound","Premium speaker grille with metal finish.","Speaker crackle, balance, bass","mercedes,burmester"],
+    ["Interior","Panoramic Roof Interior","Glass roof from inside with sunblind.","Blind motor, leaks, rattles","mercedes,panoramic,interior"],
+    ["Interior","Carbon Fibre Trim","Sporty carbon-look interior trim.","Scratches, clip fit, gloss","mercedes,carbon,interior"],
+    ["Interior","Wood Veneer Trim","Open-pore wood trim in the cabin.","Cracks, fading, edge lifting","mercedes,wood,interior"],
+    ["Interior","AMG Sport Seats","Heavily bolstered sports seats.","Side bolster wear, adjusters","mercedes,amg,seat"],
+    ["Interior","Headliner","Fabric or Alcantara roof lining.","Sagging, stains, light fittings","mercedes,headliner"],
+    ["Interior","Boot Space","Carpeted luggage area with storage hooks.","Carpet, floor panel, boot seal","mercedes,trunk"],
+    ["Interior","Pedals &amp; Footwell","Drive controls and carpeted footwell.","Pedal wear, mats, damp smell","mercedes,pedals"],
+    ["Interior","Seat Controls","Memory seat buttons on the door.","Memory function, motors, switches","mercedes,seat,control"],
+    ["Interior","Key &amp; Start Button","Keyless entry fob and start button.","Key battery, button response","mercedes,key"],
+    ["Interior","Head-Up Display","Speed and navigation projected on glass.","Projection clarity, alignment","mercedes,hud"],
+    ["Interior","Rear Entertainment Screen","Seat-back screens for rear passengers.","Screen function, wiring, mounts","mercedes,rear,screen"],
+    ["Interior","Cabin Overview","Full interior view of a well-kept Benz.","Overall wear, smells, trim fit","mercedes,interior"],
+    ["Interior","Airbag &amp; Safety Panel","Safety system components in the cabin.","Warning lamps, belts, SRS status","mercedes,safety"]
+  ];
+
+  const items = D.map((r, i) => ({ id: i, type: r[0], title: r[1].replace(/&amp;/g,"&"), info: r[2], focus: r[3], kw: r[4], src: r[5] }));
+  /* Image pools (Unsplash). Each card uses a different crop/zoom so repeats look different.
+     If any ID is ever removed, the loader automatically tries the next source. */
+  const POOL = {
+    Exterior: ["1632823471564-1ecdf5c5edb3","1618843479313-40f8afb4b4d8","1553440569-bcc63803a83d","1617814076367-b759c7d7e738","1605559424843-9e4c228bf1c2","1563720223185-11003d516935","1580273916550-e323be2ae537","1544636331-e26879cd4d9b","1583267746897-2cf415887172"],
+    Interior: ["1606016159991-dfe4f2746ad5","1511919884226-fd3cad34687c","1503736334956-4c8f8e92946d","1549399542-7e3f8b79c341","1489824904134-891ab64532f1","1632823471564-1ecdf5c5edb3"]
+  };
+  const proxy = (u, w) => "https://wsrv.nl/?url=" + encodeURIComponent(u) + "&w=" + w + "&output=jpg";
+
+  /* Returns a list of sources, tried in order until one loads */
+  function imgUrls(it, w, h) {
+    const pool = POOL[it.type], id = pool[it.id % pool.length];
+    const fx = (0.2 + (it.id % 5) * 0.15).toFixed(2), z = (1 + (it.id % 3) * 0.35).toFixed(2);
+    const uns = "https://images.unsplash.com/photo-" + id + "?auto=format&q=75&w=" + w + "&h=" + h + "&fit=crop&crop=focalpoint&fp-x=" + fx + "&fp-y=0.5&fp-z=" + z;
+    const flk = "https://loremflickr.com/" + w + "/" + h + "/" + it.kw + "?lock=" + (it.id + 11);
+    return [it.src, uns, proxy(uns, w), flk, proxy(flk, w)].filter(Boolean);
+  }
+
+  /* Built-in placeholder (never fails) */
+  function placeholder(title) {
+    const t = title.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    const svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600"><rect width="800" height="600" fill="#0d0d0d"/><circle cx="400" cy="260" r="70" fill="none" stroke="#c89632" stroke-width="5"/><path d="M400 200v60l-52 30M400 260l52 30" stroke="#efc96f" stroke-width="5" fill="none"/><text x="400" y="410" fill="#efc96f" font-family="Arial" font-size="30" font-weight="700" text-anchor="middle">' + t + '</text><text x="400" y="450" fill="#8e8e8e" font-family="Arial" font-size="18" text-anchor="middle">SUPERSEB — PIMP MY BENZ</text></svg>';
+    return "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+  }
+
+  const grid = document.getElementById("grid");
+  const countEl = document.getElementById("count");
+  let current = "all", visible = items.slice();
+
+  /* ---------- LOADER-AWARE IMAGE ---------- */
+  function loadImg(img, loader, urls, title) {
+    const token = (img._tok = (img._tok || 0) + 1);
+    let i = 0, timer = null;
+    const stale = () => img._tok !== token;
+    const finish = () => { clearTimeout(timer); img.classList.add("loaded"); loader.classList.add("done"); };
+    const next = () => {
+      if (stale()) return;
+      clearTimeout(timer);
+      if (i >= urls.length) { img.onload = finish; img.onerror = null; img.src = placeholder(title); return; }
+      const probe = new Image();
+      const url = urls[i++];
+      let settled = false;
+      const fail = () => { if (settled) return; settled = true; probe.onload = probe.onerror = null; next(); };
+      timer = setTimeout(fail, 9000);
+      probe.onload = () => {
+        if (settled || stale()) return;
+        settled = true; clearTimeout(timer);
+        img.onload = finish; img.onerror = null; img.src = url;
+      };
+      probe.onerror = fail;
+      probe.referrerPolicy = "no-referrer";
+      probe.src = url;
+    };
+    img.classList.remove("loaded");
+    loader.classList.remove("done", "failed");
+    next();
+  }
+
+  function render() {
+    visible = items.filter(i => current === "all" || i.type === current);
+    countEl.textContent = "Showing " + visible.length + " of " + items.length + " views";
+    grid.innerHTML = "";
+    const io = "IntersectionObserver" in window ? new IntersectionObserver((es) => {
+      es.forEach(e => { if (e.isIntersecting) { e.target._load(); io.unobserve(e.target); } });
+    }, { rootMargin: "300px" }) : null;
+
+    visible.forEach((it, idx) => {
+      const card = document.createElement("button");
+      card.type = "button";
+      card.className = "card";
+      card.setAttribute("aria-label", "Open " + it.title);
+      card.innerHTML =
+        '<div class="thumb"><span class="tag">' + it.type + '</span>' +
+        '<div class="loader"><div class="ring"></div></div>' +
+        '<img alt="Mercedes-Benz ' + it.title + '" decoding="async"></div>' +
+        '<div class="card-body"><h3>' + it.title + '</h3><p>' + it.info + '</p></div>';
+      const img = card.querySelector("img"), loader = card.querySelector(".loader");
+      card._load = () => loadImg(img, loader, imgUrls(it, 600, 450), it.title);
+      card.addEventListener("click", () => openLb(idx));
+      grid.appendChild(card);
+      io ? io.observe(card) : card._load();
+    });
+  }
+
+  document.getElementById("filters").addEventListener("click", (e) => {
+    const b = e.target.closest(".filter");
+    if (!b) return;
+    document.querySelectorAll(".filter").forEach(x => x.classList.toggle("active", x === b));
+    current = b.dataset.f;
+    render();
+  });
+
+  /* ---------- LIGHTBOX ---------- */
+  const lb = document.getElementById("lb"), lbImg = document.getElementById("lbImg"), lbLoader = document.getElementById("lbLoader");
+  let pos = 0;
+
+  function show() {
+    const it = visible[pos];
+    lbImg.alt = "Mercedes-Benz " + it.title;
+    loadImg(lbImg, lbLoader, imgUrls(it, 1400, 900), it.title);
+    document.getElementById("lbTitle").textContent = it.title;
+    document.getElementById("lbText").textContent = it.info;
+    document.getElementById("lbFocus").textContent = "INSPECTION FOCUS: " + it.focus.toUpperCase();
+    document.getElementById("lbCount").textContent = it.type.toUpperCase() + "  ·  " + (pos + 1) + " / " + visible.length;
+  }
+  function openLb(i) { pos = i; lb.classList.add("open"); document.body.style.overflow = "hidden"; show(); }
+  function closeLb() { lb.classList.remove("open"); document.body.style.overflow = ""; lbImg._tok = (lbImg._tok || 0) + 1; lbImg.removeAttribute("src"); }
+  function step(d) { pos = (pos + d + visible.length) % visible.length; show(); }
+
+  document.getElementById("lbClose").onclick = closeLb;
+  document.getElementById("lbPrev").onclick = () => step(-1);
+  document.getElementById("lbNext").onclick = () => step(1);
+  document.getElementById("lbStage").addEventListener("click", (e) => { if (e.target.id === "lbStage") closeLb(); });
+  document.addEventListener("keydown", (e) => {
+    if (!lb.classList.contains("open")) return;
+    if (e.key === "Escape") closeLb();
+    if (e.key === "ArrowLeft") step(-1);
+    if (e.key === "ArrowRight") step(1);
+  });
+  let sx = 0;
+  lb.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener("touchend", (e) => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 50) step(dx < 0 ? 1 : -1);
+  });
+
+  /* ---------- STATS + LOGO FALLBACK ---------- */
+  document.getElementById("statAll").textContent = items.length;
+  document.getElementById("statExt").textContent = items.filter(i => i.type === "Exterior").length;
+  document.getElementById("statInt").textContent = items.filter(i => i.type === "Interior").length;
+
+  const logo = document.querySelector(".topbar-logo"), fb = document.querySelector(".topbar-fallback");
+  const showFb = () => { logo.style.display = "none"; fb.style.display = "block"; };
+  logo.addEventListener("error", showFb);
+  if (logo.complete && logo.naturalWidth === 0) showFb();
+
+  render();
+})();
+</script>
+</body>
+</html>
